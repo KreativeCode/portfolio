@@ -1,16 +1,65 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<section class="page-section polls" id="polls">
-    <h1>Polls</h1>
-    {% if latest_question_list %}
-    <ul>
-        {% for question in latest_question_list %}
-        <li><a href="{% url 'polls:detail' question.id %}">{{ question.question_text }}</a></li>
-        {% endfor %}
-    </ul>
-    {% else %}
-    <p>No polls are available.</p>
-    {% endif %}
+
+<header class="masthead bg-primary text-white text-center">
+    <div class="container d-flex align-items-center flex-column">
+        <!-- Masthead Heading-->
+        <h1 class="masthead-heading text-uppercase mb-0">Polls</h1>
+        <!-- Icon Divider-->
+        <div class="divider-custom divider-light">
+            <div class="divider-custom-line"></div>
+            <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+            <div class="divider-custom-line"></div>
+        </div>
+        <!-- Masthead Subheading-->
+        <p class="masthead-subheading font-weight-light mb-0">Simple Polls app to keep track of polls and votes</p>
+    </div>
+</header>
+<section class="page-section bg-secondary text-white text-center" id="polls">
+    <div class="container d-flex align-items-center flex-column">
+        <div class="row">
+            <div class="col-md-12">
+                <h1>My Polls</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4 bg-primary">
+                {% if latest_question_list %}
+                {% for question in latest_question_list %}
+                <div class="col-md-12 bg-primary">
+                    <h1>{{ question.question_text }}</h1>
+                    <a href="{% url 'polls:detail' question.id %}"><button class="btn btn-primary">Vote</button></a>
+                </div>
+                {% endfor %}
+                {% else %}
+                <p>No polls are available.</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</section>
+<section class="page-section bg-primary text-white text-center" id="polls">
+    <div class="container d-flex align-items-center flex-column">
+        <div class="row">
+            <div class="col-md-12">
+                <h1>Create Your Own</h1>
+                <h3>Create your own polls for this session</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                {% if latest_question_list %}
+                <ul>
+                    {% for question in latest_question_list %}
+                    <li><a href="{% url 'polls:detail' question.id %}">{{ question.question_text }}</a></li>
+                    {% endfor %}
+                </ul>
+                {% else %}
+                <p>No polls are available.</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
 </section>
 {% endblock %}

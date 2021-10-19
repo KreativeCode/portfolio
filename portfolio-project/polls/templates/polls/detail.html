@@ -1,21 +1,37 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<section class="page-section polls-results" id="polls-results">
-    <form action="{% url 'polls:vote' question.id %}" method="post">
-        {% csrf_token %}
-        <!-- Handle Cross Site Request Forgeries -->
-        <fieldset>
-            <legend>
-                <h1>{{ question.question_text }}</h1>
-            </legend>
-            {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
-            {% for choice in question.choice_set.all %}
-            <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}">
-            <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label><br>
-            {% endfor %}
-        </fieldset>
-        <input type="submit" value="Vote">
-    </form>
+<section class="mt-5 page-section polls-results" id="polls-results">
+    <div class="container d-flex align-items-center flex-column">
+        <div class="row">
+            <div class="col-md-auto bg-primary">
+                <form action="{% url 'polls:vote' question.id %}" method="post">
+                    {% csrf_token %}
+                    <!-- Handle Cross Site Request Forgeries -->
+                    <fieldset>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <legend>
+                                    <h1>{{ question.question_text }}</h1>
+                                </legend>
+                            </div>
+                        </div>
+                        {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="btn-group-vertical">
+                                    {% for choice in question.choice_set.all %}
+                                    <input type="radio" class="btn-check" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}" autocomplete=" off" />
+                                    <label class="btn btn-secondary" for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <input class="btn btn-primary" type="submit" value="Submit">
+                </form>
+            </div>
+        </div>
+    </div>
 </section>
 {% endblock %}
