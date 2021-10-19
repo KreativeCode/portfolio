@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<!-- Masthead-->
+<header class="masthead bg-primary text-white text-center">
+    <div class="container d-flex align-items-center flex-column">
+        <!-- Masthead Heading-->
+        <h1 class="masthead-heading text-uppercase mb-0">Tic Tac Toe</h1>
+        <!-- Icon Divider-->
+        <div class="divider-custom divider-light">
+            <div class="divider-custom-line"></div>
+            <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+            <div class="divider-custom-line"></div>
+        </div>
+        <!-- Masthead Subheading-->
+        <p class="masthead-subheading font-weight-light mb-0">Tic Tac Toe Game Playable with Friends</p>
+    </div>
+</header>
+
+<!-- playboard section -->
+<div class="play-board">
+    <div class="play-area">
+        <section>
+            <span class="box1"></span>
+            <span class="box2"></span>
+            <span class="box3"></span>
+        </section>
+        <section>
+            <span class="box4"></span>
+            <span class="box5"></span>
+            <span class="box6"></span>
+        </section>
+        <section>
+            <span class="box7"></span>
+            <span class="box8"></span>
+            <span class="box9"></span>
+        </section>
+    </div>
+</div>
+
+<!-- <script src="script.js"></script> -->
+{% endblock %}
