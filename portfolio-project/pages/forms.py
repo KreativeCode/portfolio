@@ -1,8 +1,8 @@
-# sendemail/forms.py
 from django import forms
+from django.core.mail import send_mail
 
 class ContactForm(forms.Form):
-    name = forms.EmailField(required=True, widget=forms.TextInput
+    name = forms.CharField(required=True, widget=forms.TextInput
                             (attrs={'class':'form-control',
 				                    'id':'name',
                                     'placeholder': 'Name'}))
@@ -20,7 +20,3 @@ class ContactForm(forms.Form):
                                      'placeholder': 'Message',
                                      'cols': 30,
                                      'rows': 8}))
-
-    def send_email(self):
-        # send email using the self.cleaned_data dictionary
-        pass

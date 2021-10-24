@@ -1,4 +1,4 @@
-<section class="page-section contact">
+<section class="page-section contact" id="contact">
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-6 text-center mb-5">
@@ -23,10 +23,16 @@
                         </div>
                         <div class="col-lg-8">
                             <div class="contact-wrap">
-                                <div id="form-message-warning" class="mb-4 w-100 text-center"></div>
-                                <div id="form-message-success" class="mb-4 w-100 text-center">
-                                    Your message was sent, thank you!
+                                {% if messageSent %}
+                                <div class="container">
+                                    <div class="row text-center">
+                                        <div class="col-md-12">
+                                            <h3><strong>Email successfully sent</strong></h3>
+                                            <p>Your message was successfully sent to {{ form.cleaned_data.to }}</p>
+                                        </div>
+                                    </div>
                                 </div>
+                                {% else %}
                                 <form method="POST" id="contactForm" name="contactForm" class="contactForm">
                                     {% csrf_token %}
                                     <div class="row">
@@ -58,6 +64,7 @@
                                         </div>
                                     </div>
                                 </form>
+                                {% endif %}
                             </div>
                         </div>
                     </div>

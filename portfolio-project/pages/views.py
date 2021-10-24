@@ -3,6 +3,8 @@ from django.http import HttpResponse
 from django.urls import reverse
 from django.core.mail import send_mail, BadHeaderError
 from django.views import View
+from django.conf import settings
+import logging
 
 from .forms import ContactForm
 
@@ -10,25 +12,38 @@ from .forms import ContactForm
 class IndexView(View):
     template_name = 'pages/index.html'
     success_url = 'home' # dummy view
-    context = {"form": ContactForm()}
+    context = {}
     # myform is the definition/class of your form which contains all attrs.
 
     def get(self, request):
-        context = self.context
-        # context['form'] = form # fill out your data here for get request
-        return render(request, self.template_name, context)
+        self.context['form'] = ContactForm() # fill out your data here for get request
+        return render(request, self.template_name, self.context)
 
     def post(self, request):
-        context=self.context
-        # self.context certain that you're using exact form which you defined in class-scope
-        form=context['form']
+        # create a variable to keep track of the form
+        messageSent = False
+
+        form = ContactForm(request.POST)
         # Form Validation
+        print(form.errors)
         if form.is_valid():
+            cd = form.cleaned_data
+            subject = "Sending an email with Django"
+            name = cd['name']
+            email = cd['email']
+            subject = cd['subject']
+            message = 'name: '+name+'\n'
+            message += 'From: '+email+'\n'
+
+            message += cd['message']
             #perform any logical validations here and save the form if required
-            return redirect(self.success_url)
+            send_mail(subject, message, email, ['chris.polanco2@gmail.com'])
+
+            messageSent = True
 
         context = self.context
         context['form'] = form # just to show you that you can access that form anywhere
+        context['messageSent'] = messageSent
         return render(request, self.template_name, context)
 
 def successView(request):
