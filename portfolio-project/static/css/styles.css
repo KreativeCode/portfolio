@@ -4899,6 +4899,17 @@ textarea.form-control-lg {
   top: -1px;
 }
 
+.badge-primary {
+color: #fff;
+background-color: #007bff;
+}
+
+.badge-pill {
+padding-right: .6em;
+padding-left: .6em;
+border-radius: 10rem;
+}
+
 .alert {
   position: relative;
   padding: 1rem 1rem;

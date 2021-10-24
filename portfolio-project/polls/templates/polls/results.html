@@ -1,15 +1,31 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<section class="page-section polls-results" id="polls-results">
-    <h1>{{ question.question_text }}</h1>
+<section class="page-section polls-results bg-secondary" id="polls-results">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1>Poll Results</h1>
+                <hr />
+                <br />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 bg-primary">
+                <h1>{{ question.question_text }}</h1>
 
-    <ul>
-        {% for choice in question.choice_set.all %}
-        <li>{{ choice.choice_text }} -- {{ choice.votes }} vote{{ choice.votes|pluralize }}</li>
-        {% endfor %}
-    </ul>
-
-    <a href="{% url 'polls:detail' question.id %}">Vote again?</a>
+                <ul class="list-group">
+                    {% for choice in question.choice_set.all %}
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        {{ choice.choice_text }}
+                        <span class="badge badge-primary badge-pill">{{ choice.votes }}</span>
+                    </li>
+                    {% endfor %}
+                </ul>
+                <br />
+                <a href="{% url 'polls:detail' question.id %}"><button class="btn btn-primary">Vote again?</button></a>
+            </div>
+        </div>
+    </div>
 </section>
 {% endblock %}
